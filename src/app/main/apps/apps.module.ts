@@ -15,6 +15,10 @@ const routes = [
     {
         path        : 'e-commerce',
         loadChildren: './e-commerce/e-commerce.module#EcommerceModule'
+    },
+    {
+        path        : 'mrn',
+        loadChildren: './mrn/mrn.module#MrnModule'
     }
 ];
 

@@ -24,44 +24,58 @@ export const navigation: FuseNavigation[] = [
                 ]
             },
             {
-                id       : 'calendar',
-                title    : 'Calendar',
-                translate: 'NAV.CALENDAR',
-                type     : 'item',
-                icon     : 'today',
-                url      : '/apps/calendar'
+                id       : 'mrns',
+                title    : 'MRN',
+                translate: 'MRN',
+                type     : 'collapsable',
+                icon     : 'user',
+                children : [
+                    {
+                        id   : 'mrn',
+                        title: 'Meterial Requisition Note',
+                        type : 'item',
+                        url  : '/apps/mrn/mrn'
+                    },
+                    {
+                        id   : 'mrn',
+                        title: 'M R N Details',
+                        type : 'item',
+                        url  : '/apps/mrn/mrndetails'
+                    }
+                ]
+                //url      : '/apps/mrn'
             },
             {
                 id       : 'e-commerce',
-                title    : 'E-Commerce',
+                title    : 'Notes',
                 translate: 'NAV.ECOMMERCE',
                 type     : 'collapsable',
                 icon     : 'shopping_cart',
                 children : [
                     {
                         id        : 'products',
-                        title     : 'Products',
+                        title     : 'GIN',
                         type      : 'item',
                         url       : '/apps/e-commerce/products',
                         exactMatch: true
                     },
                     {
                         id        : 'productDetail',
-                        title     : 'Product Detail',
+                        title     : 'GRN',
                         type      : 'item',
                         url       : '/apps/e-commerce/products/1/printed-dress',
                         exactMatch: true
                     },
                     {
                         id        : 'orders',
-                        title     : 'Orders',
+                        title     : 'MRN',
                         type      : 'item',
                         url       : '/apps/e-commerce/orders',
                         exactMatch: true
                     },
                     {
                         id        : 'orderDetail',
-                        title     : 'Order Detail',
+                        title     : 'PO',
                         type      : 'item',
                         url       : '/apps/e-commerce/orders/1',
                         exactMatch: true
