@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MrnComponent } from './mrn.component';
 import { RouterModule, Routes } from '@angular/router';
 import {
   MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
@@ -11,70 +10,62 @@ import {
   MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule,
   MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule
 } from '@angular/material';
+
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MrnDetailsComponent } from './mrn-details.component';
 
 const routes: Routes = [
   {
-      path     : '**',
-      component: MrnComponent,
-      children : [],
-      resolve  : {
-          
-      }
+    path: '**',
+    component: MrnDetailsComponent,
+    //data:{id:1},
+    resolve: {
+      //data: EcommerceProductsService
+    }
   }
 ];
-// const routes: Routes = [
-//   {
-//       path     : 'mrn',
-//       component: MrnComponent,
-//       resolve  : {
-//           //data: EcommerceProductsService
-//       }
-//   }
-// ];
 
 
 @NgModule({
-  declarations: [MrnComponent],
+  declarations: [MrnDetailsComponent],
   imports: [
     RouterModule.forChild(routes),
     MatAutocompleteModule,
-        MatBadgeModule,
-        MatBottomSheetModule,
-        MatButtonModule,
-        MatButtonToggleModule,
-        MatCardModule,
-        MatCheckboxModule,
-        MatChipsModule,
-        MatDatepickerModule,
-        MatDialogModule,
-        MatDividerModule,
-        MatExpansionModule,
-        MatFormFieldModule,
-        MatGridListModule,
-        MatIconModule,
-        MatInputModule,
-        MatListModule,
-        MatMenuModule,
-        MatMomentDateModule,
-        MatPaginatorModule,
-        MatProgressBarModule,
-        MatProgressSpinnerModule,
-        MatRadioModule,
-        MatRippleModule,
-        MatSelectModule,
-        MatSidenavModule,
-        MatSlideToggleModule,
-        MatSliderModule,
-        MatSnackBarModule,
-        MatSortModule,
-        MatStepperModule,
-        MatTableModule,
-        MatTabsModule,
-        MatToolbarModule,
-        MatTooltipModule,
-        MatTreeModule,
-    
+    MatBadgeModule,
+    MatBottomSheetModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatMomentDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatStepperModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatTreeModule,
     CommonModule
   ],
   exports: [
@@ -116,4 +107,4 @@ const routes: Routes = [
     MatTreeModule
 ]
 })
-export class MrnModule { }
+export class MrnDetailsModule { }
