@@ -46,6 +46,14 @@ export const navigation: FuseNavigation[] = [
                 // ]
             },
             {
+                id       : 'srn',
+                title    : 'SRN',
+                translate: 'SRN',
+                type     : 'item',
+                icon     : 'user',
+                url      : '/apps/srn/srn'
+            },
+            {
                 id       : 'e-commerce',
                 title    : 'Notes',
                 translate: 'NAV.ECOMMERCE',
