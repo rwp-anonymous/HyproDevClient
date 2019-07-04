@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-
+import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { Routes, Router } from '@angular/router';
 export interface UserData {
   id: string;
   name: string;
@@ -28,28 +29,33 @@ const NAMES: string[] = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
 })
 export class MrnComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
+  displayedColumns: string[] = ['name', 'progress', 'color','action'];
   dataSource: MatTableDataSource<UserData>;
-  
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
+    { value: 'steak-0', viewValue: 'Steak' },
+    { value: 'pizza-1', viewValue: 'Pizza' },
+    { value: 'tacos-2', viewValue: 'Tacos' }
   ];
-  constructor() {
+  constructor(private router:Router) {
 
-     // Create 100 users
-     const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+    // Create 100 users
+    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
 
-     // Assign the data to the data source for the table to render
-     this.dataSource = new MatTableDataSource(users);
+    // Assign the data to the data source for the table to render
+    this.dataSource = new MatTableDataSource(users);
   }
 
   ngOnInit() {
 
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   applyFilter(filterValue: string) {
@@ -59,14 +65,19 @@ export class MrnComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
+
+  getRow(row:any):void{
+    console.log(row);
+    this.router.navigate(['./apps/mrn-details',row.id]);
+  }
+
 }
 
 /** Builds and returns a new User. */
 function createNewUser(id: number): UserData {
   const name =
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
 
   return {
     id: id.toString(),
