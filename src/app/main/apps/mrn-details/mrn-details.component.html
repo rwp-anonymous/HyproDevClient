@@ -1,3 +1,208 @@
-<p>
-  mrn-details works!
-</p>
+<div class="page-layout carded fullwidth">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- CONTENT HEADER -->
+    <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
+      <h2 class="m-0">Meterial Requisition Notie Details</h2>
+    </div>
+    <!-- / CONTENT HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+
+      <!-- CONTENT TOOLBAR -->
+      <div class="toolbar px-24 py-8 ">
+        <span></span>
+      </div>
+      <!-- / CONTENT TOOLBAR -->
+
+
+      <!-- CONTENT -->
+      <div class="content p-24">
+
+        <div fxLayout="row">
+
+
+          <mat-form-field class="p-24">
+            <input matInput placeholder="Srn No" disabled>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Site Location" disabled>
+              <mat-option *ngFor="let sort of sorts" [value]="sort.value">
+                {{sort.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div>
+            <mat-form-field class="p-24">
+              <input matInput [matDatepicker]="dp1" placeholder="Completly disabled" disabled>
+              <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+              <mat-datepicker #dp1></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Request By" disabled>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field class="p-24">
+              <input matInput [matDatepicker]="dp2" placeholder="Completly disabled" disabled>
+              <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+              <mat-datepicker #dp2></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Approved By" disabled>
+            </mat-form-field>
+          </div>
+
+
+          <div class="card-preview" id="side-card">
+
+            <div class="fuse-card">
+
+              <div class="p-16" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="h1 pr-16">Document History</div>
+
+                <div>
+
+                </div>
+              </div>
+
+              <table class="simple clickable">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th class="text-right">Clicks</th>
+                    <th class="text-right">Conv</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Appproved by - John on 2019-01-05</td>
+                    
+                  </tr>
+                  <tr>
+                    <td>Created MRN on 2019-01-01</td>
+                   
+                  </tr>
+
+                </tbody>
+              </table>
+
+              <div class="card-divider full-width"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <h3 class="m-0">Industrial Materials</h3>
+          <!-- Table Mrn -->
+          <table mat-table [dataSource]="dataSourceIncMat" matSort class="mat-elevation-z8 ">
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="itemNo">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Item No</th>
+              <td mat-cell *matCellDef="let row"> {{row.itemNo}} </td>
+            </ng-container>
+
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="itemName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Item name </th>
+              <td mat-cell *matCellDef="let row"> {{row.itemName}}% </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="unit">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Unit </th>
+              <td mat-cell *matCellDef="let row"> {{row.unit}} </td>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="qty">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> QTY </th>
+              <td mat-cell *matCellDef="let row"> {{row.qty}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="remarks">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Remarks </th>
+              <td mat-cell *matCellDef="let row"> {{row.remarks}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsIncMaterial"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsIncMaterial;"></tr>
+
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [length]="5" [pageSize]="5"></mat-paginator>
+
+
+        </div>
+
+        <div>
+
+          <h3 class="m-0">Linked Store Requisition Notes</h3>
+          <!-- Table Mrn -->
+          <table mat-table [dataSource]="dataSourceSRN" matSort class="mat-elevation-z8 ">
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="srnNo">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> SRN No</th>
+              <td mat-cell *matCellDef="let row"> {{row.srnNo}} </td>
+            </ng-container>
+
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="itemName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Item name</th>
+              <td mat-cell *matCellDef="let row"> {{row.itemName}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="unit">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Unit </th>
+              <td mat-cell *matCellDef="let row"> {{row.unit}} </td>
+            </ng-container>
+
+            <!-- Color Column -->
+            <ng-container matColumnDef="order">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Order </th>
+              <td mat-cell *matCellDef="let row"> {{row.order}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+              <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsSRN"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsSRN;"></tr>
+
+          </table>
+          <mat-paginator #paginatorpo [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+
+
+      </div>
+      <!-- / CONTENT -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>

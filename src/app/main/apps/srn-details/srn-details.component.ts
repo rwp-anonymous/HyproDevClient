@@ -15,12 +15,13 @@ export interface MrnData {
   color: string;
 }
 
+/** Constants used to fill up our data base. */
+const COLORS: string[] = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
+  'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
 const NAMES: string[] = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
   'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
   'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
 
-  const COLORS: string[] = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-  'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
 
 @Component({
   selector: 'app-srn-details',
@@ -59,9 +60,13 @@ export class SrnDetailsComponent implements OnInit {
     this.dataSourcePo.paginator = this.paginatorpo;
     this.dataSourcePo.sort = this.sort;
   }
+
+  
 }
 
-function createNewUser(id: number): MrnData {
+
+/** Builds and returns a new User. */
+function createNewUser(id: number): MrnData  {
   const name =
     NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
     NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
@@ -73,3 +78,5 @@ function createNewUser(id: number): MrnData {
     color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
   };
 }
+
+

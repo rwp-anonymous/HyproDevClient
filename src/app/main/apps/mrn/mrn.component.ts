@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
 import { Routes, Router } from '@angular/router';
+import { MrnService } from './mrn.service';
 export interface UserData {
   id: string;
   name: string;
@@ -40,7 +41,10 @@ export class MrnComponent implements OnInit {
     { value: 'pizza-1', viewValue: 'Pizza' },
     { value: 'tacos-2', viewValue: 'Tacos' }
   ];
-  constructor(private router:Router) {
+  constructor(
+    private router:Router,
+    private mrnService:MrnService
+    ) {
 
     // Create 100 users
     const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
@@ -68,6 +72,7 @@ export class MrnComponent implements OnInit {
 
   getRow(row:any):void{
     console.log(row);
+    this.mrnService.mrnId = row.id;
     this.router.navigate(['./apps/mrn-details',row.id]);
   }
 
