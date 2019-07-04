@@ -5,6 +5,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { MrnDetailsComponent } from './mrn-details/mrn-details.component';
 import { MrnComponent } from './mrn/mrn.component';
 
+
 const routes = [
     {
         path        : 'dashboards/analytics',
@@ -23,8 +24,14 @@ const routes = [
         loadChildren: './mrn/mrn.module#MrnModule'
     },
     {
+
+        path        : 'srn',
+        loadChildren: './srn/srn.module#SrnModule'
+    },
+    {
         path        : 'mrn-details',
         loadChildren: './mrn-details/mrn-details.module#MrnDetailsModule'
+
     }
 ];
 
@@ -32,7 +39,8 @@ const routes = [
     imports     : [
         RouterModule.forChild(routes),
         FuseSharedModule
-    ]
+    ],
+    
 })
 export class AppsModule
 {
