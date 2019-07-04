@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 
+
 const routes = [
     {
         path        : 'dashboards/analytics',
@@ -19,6 +20,10 @@ const routes = [
     {
         path        : 'mrn',
         loadChildren: './mrn/mrn.module#MrnModule'
+    },
+    {
+        path        : 'srn',
+        loadChildren: './srn/srn.module#SrnModule'
     }
 ];
 
@@ -26,7 +31,8 @@ const routes = [
     imports     : [
         RouterModule.forChild(routes),
         FuseSharedModule
-    ]
+    ],
+    
 })
 export class AppsModule
 {
