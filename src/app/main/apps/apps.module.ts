@@ -32,6 +32,11 @@ const routes = [
         path        : 'mrn-details',
         loadChildren: './mrn-details/mrn-details.module#MrnDetailsModule'
 
+    },
+    {
+        path        : 'srn-details',
+        loadChildren: './srn-details/srn-details.module#SrnDetailsModule'
+
     }
 ];
 
