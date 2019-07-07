@@ -9,6 +9,7 @@ import { MatButtonModule, MatFormFieldModule,
   MatTableModule,
   MatPaginatorModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PopupComponent } from './popup/popup.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [MrnCreateComponent],
+  declarations: [MrnCreateComponent,PopupComponent],
   imports: [
     RouterModule.forChild(routes),
     MatButtonModule,
@@ -50,6 +51,7 @@ const routes: Routes = [
     MatTableModule,
     MatPaginatorModule
 
-]
+],
+entryComponents:[PopupComponent]
 })
 export class MrnCreateModule { }
