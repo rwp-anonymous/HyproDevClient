@@ -1,11 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 export interface SiteLocation {
   value: string;
   viewValue: string;
 }
 
-
+export interface MrnData {
+  mrnNo: string;
+  itemName: string;
+  unit: string;
+  orderQty: number;
+  remarks: string;
+}
 
 @Component({
   selector: 'app-srn-document-generator',
@@ -14,11 +21,21 @@ export interface SiteLocation {
 })
 export class SrnDocumentGeneratorComponent implements OnInit {
 
-  public mrnNo: number;
-  public rows: Array<{mrnNo: number}> = [];
+  displayedColumnsMrn: string[] = ['mrnNo','itemName', 'unit', 'orderQty','remarks'];
+  dataSourceMrn: MatTableDataSource<MrnData>;
+  data:MrnData[] = [
+    {mrnNo:'001',itemName:'Dynamites',orderQty:100,remarks:'no rush',unit:'kg'},
+    {mrnNo:'001',itemName:'Dynamites',orderQty:100,remarks:'no rush',unit:'kg'},
+    {mrnNo:'001',itemName:'Dynamites',orderQty:100,remarks:'no rush',unit:'kg'},
+    {mrnNo:'001',itemName:'Dynamites',orderQty:100,remarks:'no rush',unit:'kg'},
+    {mrnNo:'001',itemName:'Dynamites',orderQty:100,remarks:'no rush',unit:'kg'},
+    {mrnNo:'001',itemName:'Dynamites',orderQty:100,remarks:'no rush',unit:'kg'},
 
-  displayedColumnsMrn: string[] = ['mrnNo'];
-  //dataSourceMrn: MatTableDataSource<MrnData>;
+];
+
+@ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
+ 
 
 
   sitelocations: SiteLocation[] = [
@@ -31,10 +48,22 @@ export class SrnDocumentGeneratorComponent implements OnInit {
 
   constructor() { }
 
+  ngAfterViewInit() {
+    this.dataSourceMrn.paginator = this.paginator;
+    this.dataSourceMrn.sort = this.sort;
+  }
   ngOnInit() {
+    this.dataSourceMrn = new MatTableDataSource(this.data);
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSourceMrn.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSourceMrn.paginator) {
+      this.dataSourceMrn.paginator.firstPage();
+    }
+  }
   buttonClicked() {
-    this.rows.push( {mrnNo: this.mrnNo } );
+    //this.rows.push( {mrnNo: this.mrnNo } );
   }
 }

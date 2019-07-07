@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MrnDetailsComponent } from './mrn-details/mrn-details.component';
 import { MrnComponent } from './mrn/mrn.component';
+import { MrnCreateComponent } from './mrn-create/mrn-create.component';
 
 
 const routes = [
@@ -38,11 +39,16 @@ const routes = [
         loadChildren: './srn-details/srn-details.module#SrnDetailsModule'
 
     },
+    { 
+        path        : 'mrn-create',
+        loadChildren: './mrn-create/mrn-create.module#MrnCreateModule'
+    },
     {
         path        : 'srn-document-generator',
         loadChildren: './srn-document-generator/srn-document-generator.module#SrnDocumentGeneratorModule'
+       
 
-    }
+    },
 ];
 
 @NgModule({
@@ -50,6 +56,7 @@ const routes = [
         RouterModule.forChild(routes),
         FuseSharedModule
     ],
+    declarations: [],
     
     
 })
