@@ -37,6 +37,11 @@ const routes = [
         path        : 'srn-details',
         loadChildren: './srn-details/srn-details.module#SrnDetailsModule'
 
+    },
+    {
+        path        : 'srn-document-generator',
+        loadChildren: './srn-document-generator/srn-document-generator.module#SrnDocumentGeneratorModule'
+
     }
 ];
 
@@ -45,6 +50,7 @@ const routes = [
         RouterModule.forChild(routes),
         FuseSharedModule
     ],
+    
     
 })
 export class AppsModule

@@ -69,6 +69,11 @@ export class SrnComponent implements OnInit {
     console.log(row);
     this.router.navigate(['./apps/srn-details',row.id]);
   }
+
+  getDocumentGen(){
+    
+    this.router.navigate(['./apps/srn-document-generator']);
+  }
 }
 
 /** Builds and returns a new User. */
