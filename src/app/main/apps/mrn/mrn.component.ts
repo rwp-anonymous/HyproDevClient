@@ -76,6 +76,10 @@ export class MrnComponent implements OnInit {
     this.router.navigate(['./apps/mrn-details',row.id]);
   }
 
+  navigateToCreateForm(){
+    this.router.navigate(['./apps/mrn-create']);
+  }
+
 }
 
 /** Builds and returns a new User. */

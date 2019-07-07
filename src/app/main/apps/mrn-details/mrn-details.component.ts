@@ -51,11 +51,7 @@ export class MrnDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.sub = this.route
-    //   .data
-    //   .subscribe(v => console.log(v));
-    //   console.log(this.route.snapshot.paramMap.get('id'));
-
+    
     console.log(this.mrnService.mrnId);
     // this.mrnDetailService.getMrn().subscribe((res)=>{
 
