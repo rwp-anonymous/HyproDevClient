@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { PopupComponent } from './popup/popup.component';
+import { MrnItemAddPopupService } from './popup/mrn-item-add-popup.service';
 
 
 export interface Item {
@@ -51,7 +53,9 @@ export class MrnCreateComponent implements OnInit {
   private _unsubscribeAll: Subject<any>;
 
   constructor(
-      private _formBuilder: FormBuilder
+      private _formBuilder: FormBuilder,
+      public dialog: MatDialog,
+      private _popUpService:MrnItemAddPopupService
   )
   {
       this._unsubscribeAll = new Subject();
@@ -78,6 +82,10 @@ export class MrnCreateComponent implements OnInit {
 
       this.dataSource = new MatTableDataSource(this.data);
 
+      this.dialog.afterAllClosed.subscribe((data)=>{
+          console.log(this._popUpService.item);
+      });
+
   }
 
   ngOnDestroy(): void
@@ -94,5 +102,11 @@ export class MrnCreateComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  openDialog() {
+    this.dialog.open(PopupComponent);
+    
+  }
+
 
 }

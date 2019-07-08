@@ -1,5 +1,6 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort,MatDialog } from '@angular/material';
+import { MrnAddComponent } from './popup/mrn-add.component';
 
 export interface SiteLocation {
   value: string;
@@ -46,7 +47,9 @@ export class SrnDocumentGeneratorComponent implements OnInit {
     {value: 'Arua-4', viewValue: 'Arua'}
   ];
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog,
+  ) { }
 
   ngAfterViewInit() {
     this.dataSourceMrn.paginator = this.paginator;
@@ -63,7 +66,7 @@ export class SrnDocumentGeneratorComponent implements OnInit {
       this.dataSourceMrn.paginator.firstPage();
     }
   }
-  buttonClicked() {
-    //this.rows.push( {mrnNo: this.mrnNo } );
+  MrnsPopUp() {
+    this.dialog.open(MrnAddComponent);
   }
 }

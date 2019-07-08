@@ -69,7 +69,7 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
 
-    <button mat-raised-button color="accent" class="m-24" (click)="ItemsPopUp();"> + </button>
+    <button mat-raised-button color="accent" class="m-24" (click)="openDialog();"> + </button>
 
 
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 ">

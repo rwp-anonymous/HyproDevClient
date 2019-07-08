@@ -39,16 +39,16 @@ const routes = [
         loadChildren: './srn-details/srn-details.module#SrnDetailsModule'
 
     },
-    { 
+    {
         path        : 'mrn-create',
         loadChildren: './mrn-create/mrn-create.module#MrnCreateModule'
+
     },
     {
         path        : 'srn-document-generator',
         loadChildren: './srn-document-generator/srn-document-generator.module#SrnDocumentGeneratorModule'
-       
 
-    },
+    }
 ];
 
 @NgModule({
@@ -57,7 +57,6 @@ const routes = [
         FuseSharedModule
     ],
     declarations: [],
-    
     
 })
 export class AppsModule

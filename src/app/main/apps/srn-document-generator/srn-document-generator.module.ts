@@ -13,6 +13,8 @@ import {
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { SrnDocumentGeneratorComponent } from './srn-document-generator.component';
+import { MrnAddComponent } from './popup/mrn-add.component';
+
 
 
 const routes: Routes = [
@@ -29,7 +31,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [SrnDocumentGeneratorComponent],
+  declarations: [SrnDocumentGeneratorComponent, MrnAddComponent],
   imports: [
     RouterModule.forChild(routes),
     MatAutocompleteModule,
@@ -107,6 +109,6 @@ const routes: Routes = [
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule
-]
+],entryComponents:[MrnAddComponent]
 })
 export class SrnDocumentGeneratorModule { }
