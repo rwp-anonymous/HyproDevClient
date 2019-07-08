@@ -53,6 +53,7 @@ const appRoutes: Routes = [
     ],
     imports     : [
         BrowserModule,
+        HttpClientModule,
         BrowserAnimationsModule,
         HttpClientModule,
         RouterModule.forRoot(appRoutes),

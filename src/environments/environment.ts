@@ -4,7 +4,8 @@
 
 export const environment = {
     production: false,
-    hmr       : false
+    hmr       : false,
+    serverUrl: 'http://localhost:3000/api/v2/docs'
 };
 
 /*
