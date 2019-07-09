@@ -26,6 +26,7 @@
       <!-- CONTENT -->
       <div class="content p-24">
 
+        <div fxLayout="row">
         <mat-form-field class="p-24">
           <input matInput placeholder="Srn No" disabled>
         </mat-form-field>
@@ -59,8 +60,48 @@
           <mat-form-field>
             <input matInput placeholder="Approved By" disabled>
           </mat-form-field>
-        </div>
 
+
+          <div class="card-preview" id="side-card">
+
+            <div class="fuse-card">
+
+              <div class="p-16" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="h1 pr-16">Document History</div>
+
+                <div>
+
+                </div>
+              </div>
+
+              <table class="simple clickable">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th class="text-right">Clicks</th>
+                    <th class="text-right">Conv</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Appproved by - John on 2019-01-05</td>
+                    
+                  </tr>
+                  <tr>
+                    <td>Created MRN on 2019-01-01</td>
+                   
+                  </tr>
+
+                </tbody>
+              </table>
+
+              <div class="card-divider full-width"></div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
         <div>
 
             <h3 class="m-0">Linked Material Requisition Notices</h3>
@@ -68,28 +109,33 @@
             <table mat-table [dataSource]="dataSourceMrn" matSort class="mat-elevation-z8 ">
     
               <!-- ID Column -->
-              <ng-container matColumnDef="id">
+              <ng-container matColumnDef="mrnNo">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Mrn No</th>
-                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.mrnNo}} </td>
               </ng-container>
     
     
               <!-- Progress Column -->
-              <ng-container matColumnDef="progress">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
-                <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+              <ng-container matColumnDef="itemName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Item Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.itemName}} </td>
               </ng-container>
     
               <!-- Name Column -->
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+              <ng-container matColumnDef="unit">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Unit </th>
+                <td mat-cell *matCellDef="let row"> {{row.unit}} </td>
               </ng-container>
     
               <!-- Color Column -->
-              <ng-container matColumnDef="color">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
-                <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+              <ng-container matColumnDef="order">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Order </th>
+                <td mat-cell *matCellDef="let row" > {{row.order}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                <td mat-cell *matCellDef="let row" > {{row.status}} </td>
               </ng-container>
     
               <tr mat-header-row *matHeaderRowDef="displayedColumnsMrn"></tr>
@@ -108,28 +154,29 @@
             <table mat-table [dataSource]="dataSourcePo" matSort class="mat-elevation-z8 ">
     
               <!-- ID Column -->
-              <ng-container matColumnDef="id">
+              <ng-container matColumnDef="poNo">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> PO No</th>
-                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.poNo}} </td>
               </ng-container>
     
     
-              <!-- Progress Column -->
-              <ng-container matColumnDef="progress">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
-                <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
-              </ng-container>
+              
     
               <!-- Name Column -->
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+              <ng-container matColumnDef="itemName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Item Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.itemName}} </td>
               </ng-container>
     
               <!-- Color Column -->
-              <ng-container matColumnDef="color">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
-                <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+              <ng-container matColumnDef="unit">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Unit </th>
+                <td mat-cell *matCellDef="let row" > {{row.unit}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                <td mat-cell *matCellDef="let row" > {{row.status}} </td>
               </ng-container>
     
               <tr mat-header-row *matHeaderRowDef="displayedColumnsPo"></tr>

@@ -36,8 +36,8 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-
-        <button mat-raised-button color="accent" class="m-24">Create new</button>
+        
+        <button mat-raised-button color="accent" (click)=" getDocumentGen();" class="m-24"  >Create new</button>
 
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 ">
 

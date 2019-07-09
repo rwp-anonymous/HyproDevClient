@@ -43,6 +43,11 @@ const routes = [
         path        : 'mrn-create',
         loadChildren: './mrn-create/mrn-create.module#MrnCreateModule'
 
+    },
+    {
+        path        : 'srn-document-generator',
+        loadChildren: './srn-document-generator/srn-document-generator.module#SrnDocumentGeneratorModule'
+
     }
 ];
 
