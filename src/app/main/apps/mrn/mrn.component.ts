@@ -1,26 +1,28 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
 import { Routes, Router } from '@angular/router';
 import { MrnService } from './mrn.service';
+
 export interface UserData {
   id: string;
   name: string;
   progress: string;
   color: string;
 }
+
+export interface MrnItem {
+  id:number;
+  mrnNo: string;
+  siteLocation: string;
+  status: string;
+  reqDate: string;
+  reqBy: string;
+}
+
 export interface Food {
   value: string;
   viewValue: string;
 }
-
-
-/** Constants used to fill up our data base. */
-const COLORS: string[] = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-  'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
-const NAMES: string[] = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-  'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-  'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
 
 
 @Component({
@@ -30,37 +32,40 @@ const NAMES: string[] = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
 })
 export class MrnComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'progress', 'color','action'];
-  dataSource: MatTableDataSource<UserData>;
+  displayedColumns: string[] = ['mrnNo', 'siteLocation', 'status', 'reqDate', 'reqBy', 'details'];
+  dataSource: MatTableDataSource<MrnItem>;
+  mrnItems: MrnItem[] = [];
+  mrnItem: MrnItem;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   foods: Food[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' }
+    { value: 'date', viewValue: 'Date' },
+    { value: 'status', viewValue: 'Status' },
+    { value: 'Mrn-No', viewValue: 'Mrn No' }
   ];
+
   constructor(
-    private router:Router,
-    private mrnService:MrnService
-    ) {
+    private router: Router,
+    private mrnService: MrnService
+  ) {
 
-    // Create 100 users
-    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  }
+  
+  ngAfterViewInit() {
+   
   }
 
   ngOnInit() {
-
+    this.mrnService.getAllMrns().subscribe((res: any) => {
+      if (res.length > 0) {
+        console.log(res);
+        this.bindMrnsToTable(res);
+      }
+    }, (err) => { console.log('Internal server error ..!') });
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -70,28 +75,33 @@ export class MrnComponent implements OnInit {
     }
   }
 
-  getRow(row:any):void{
-    console.log(row);
+  getRow(row: any): void {
+    // console.log(row);
     this.mrnService.mrnId = row.id;
-    this.router.navigate(['./apps/mrn-details',row.id]);
+    this.router.navigate(['./apps/mrn-details', row.id]);
   }
 
-  navigateToCreateForm(){
+  navigateToCreateForm() {
     this.router.navigate(['./apps/mrn-create']);
   }
 
-}
+  bindMrnsToTable(data: any): void {
+    let items = [];
+    data.forEach(element => {
 
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+      this.mrnItems.push({
+        id:element.id,
+        mrnNo: element.mrnNo,
+        siteLocation: element.siteLocation,
+        status: element.status,
+        reqDate: element.requestDate,
+        reqBy: ''
+      });
+    });
+    this.dataSource = new MatTableDataSource(this.mrnItems);
 
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
 }

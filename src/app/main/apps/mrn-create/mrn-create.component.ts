@@ -7,16 +7,16 @@ import { MrnItemAddPopupService } from './popup/mrn-item-add-popup.service';
 
 
 export interface Item {
-    itemNo: string;
-    itemName: string;
-    unit: string;
-    qty: number;
-    remarks: string;
-  }
-  export interface SiteLocation {
-    value: string;
-    viewValue: string;
-  }
+  itemNo: string;
+  itemName: string;
+  unit: string;
+  qty: number;
+  remarks: string;
+}
+export interface SiteLocation {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-mrn-create',
@@ -26,39 +26,38 @@ export interface Item {
 export class MrnCreateComponent implements OnInit {
 
 
-    displayedColumns: string[] = ['Item No', 'Item Name', 'Unit','Qty', 'Remarks'];
-    dataSource: MatTableDataSource<Item>;
-    data:Item[] = [
-        {itemNo:'001',itemName:'Dynamites',qty:100,remarks:'no rush',unit:'kg'},
-        {itemNo:'001',itemName:'Dynamites',qty:100,remarks:'no rush',unit:'kg'},
-        {itemNo:'001',itemName:'Dynamites',qty:100,remarks:'no rush',unit:'kg'},
-        {itemNo:'001',itemName:'Dynamites',qty:100,remarks:'no rush',unit:'kg'},
-        {itemNo:'001',itemName:'Dynamites',qty:100,remarks:'no rush',unit:'kg'},
-        {itemNo:'001',itemName:'Dynamites',qty:100,remarks:'no rush',unit:'kg'},
+  displayedColumns: string[] = ['Item No', 'Item Name', 'Unit', 'Qty', 'Remarks'];
+  dataSource: MatTableDataSource<Item>;
+  data: Item[] = [
+    { itemNo: '001', itemName: 'Dynamites', qty: 100, remarks: 'no rush', unit: 'kg' },
+    { itemNo: '001', itemName: 'Dynamites', qty: 100, remarks: 'no rush', unit: 'kg' },
+    { itemNo: '001', itemName: 'Dynamites', qty: 100, remarks: 'no rush', unit: 'kg' },
+    { itemNo: '001', itemName: 'Dynamites', qty: 100, remarks: 'no rush', unit: 'kg' },
+    { itemNo: '001', itemName: 'Dynamites', qty: 100, remarks: 'no rush', unit: 'kg' },
+    { itemNo: '001', itemName: 'Dynamites', qty: 100, remarks: 'no rush', unit: 'kg' },
 
-    ];
-  
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
-  
-    locations: SiteLocation[] = [
-      { value: 'site1', viewValue: 'Uganda' },
-      { value: 'site2', viewValue: 'Sri Lanka' },
-      { value: 'site3', viewValue: 'Baharein' }
-    ];
+  ];
 
-    
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  locations: SiteLocation[] = [
+    { value: 'site1', viewValue: 'Uganda' },
+    { value: 'site2', viewValue: 'Sri Lanka' },
+    { value: 'site3', viewValue: 'Baharein' }
+  ];
+
+
   form: FormGroup;
 
   private _unsubscribeAll: Subject<any>;
 
   constructor(
-      private _formBuilder: FormBuilder,
-      public dialog: MatDialog,
-      private _popUpService:MrnItemAddPopupService
-  )
-  {
-      this._unsubscribeAll = new Subject();
+    private _formBuilder: FormBuilder,
+    public dialog: MatDialog,
+    private _popUpService: MrnItemAddPopupService
+  ) {
+    this._unsubscribeAll = new Subject();
   }
 
   ngAfterViewInit() {
@@ -66,35 +65,35 @@ export class MrnCreateComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  ngOnInit(): void
-  {
-  
-      this.form = this._formBuilder.group({
-          mrnNo : ['', Validators.required],
-          lastName  : ['', Validators.required],
-          address   : ['', Validators.required],
-          address2  : ['', Validators.required],
-          city      : ['', Validators.required],
-          state     : ['', Validators.required],
-          postalCode: ['', [Validators.required, Validators.maxLength(5)]],
-          country   : ['', Validators.required]
-      });
+  ngOnInit(): void {
 
-      this.dataSource = new MatTableDataSource(this.data);
+    this.form = this._formBuilder.group({
+      mrnNo: ['', Validators.required],
+      lastName: ['', Validators.required],
+      address: ['', Validators.required],
+      address2: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      postalCode: ['', [Validators.required, Validators.maxLength(5)]],
+      country: ['', Validators.required]
+    });
 
-      this.dialog.afterAllClosed.subscribe((data)=>{
-          console.log(this._popUpService.item);
-      });
-
+    this.dataSource = new MatTableDataSource(this.data);
+    this._popUpService.item = null;
+    
+    this.dialog.afterAllClosed.subscribe(() => {
+      if(this._popUpService.item != undefined){
+        console.log(this._popUpService.item);
+      }
+    });
   }
 
-  ngOnDestroy(): void
-  {
-      this._unsubscribeAll.next();
-      this._unsubscribeAll.complete();
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
   }
 
-  
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -105,8 +104,12 @@ export class MrnCreateComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(PopupComponent);
-    
+    // this._popUpService.openDialog().subscribe((data)=>{
+    //   console.log("ran...");
+    // });
+
   }
+
 
 
 }

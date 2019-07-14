@@ -5,11 +5,11 @@ import { MrnDetailsService } from './mrn-details.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 export interface IncludedMaterial {
-  itemNo: string;
-  itemName: string;
+  code: string;
+  description: string;
   unit: string;
   qty: number;
-  remarks: string;
+  //remarks: string;
 }
 
 export interface SRN {
@@ -28,13 +28,13 @@ export interface SRN {
 })
 export class MrnDetailsComponent implements OnInit {
 
-  displayedColumnsIncMaterial: string[] = ['itemNo', 'itemName', 'unit', 'qty', 'remarks'];
+  displayedColumnsIncMaterial: string[] = ['code', 'description', 'unit', 'qty']; //'remarks'];
   dataSourceIncMat: MatTableDataSource<IncludedMaterial>;
 
   displayedColumnsSRN: string[] = ['srnNo', 'itemName', 'unit', 'order', 'status'];
   dataSourceSRN: MatTableDataSource<SRN>;
 
-  data: IncludedMaterial[];
+  data: IncludedMaterial[] =  [];
   dataSRN: SRN[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -46,80 +46,42 @@ export class MrnDetailsComponent implements OnInit {
     private mrnService: MrnService,
     private mrnDetailService: MrnDetailsService
   ) { 
-    this.populateData();
     this.populateDataToSRN();
   }
 
   ngOnInit() {
     
     console.log(this.mrnService.mrnId);
-    // this.mrnDetailService.getMrn().subscribe((res)=>{
-
-    // });
+    this.mrnDetailService.getMrnItems(this.mrnService.mrnId).subscribe((res)=>{
+      if(res){
+        console.log(res);
+        this.populateData(res);
+      }
+    },err=>console.log('Internal server error ..!'));
   }
 
   ngAfterViewInit() {
-
-    this.dataSourceIncMat.paginator = this.paginator;
-    this.dataSourceIncMat.sort = this.sort;
 
     this.dataSourceSRN.paginator = this.paginatorSRN;
     this.dataSourceSRN.sort = this.sort;
 
   }
 
-  populateData(): void {
+  populateData(res:any): void {
 
-    this.data = [
-      {
-        itemNo: 'DT-001',
-        itemName: 'TNT',
-        unit: 'kg',
-        qty: 12,
-        remarks: 'nothing so far'
-      },
-      {
-        itemNo: 'DT-002',
-        itemName: 'TNT',
-        unit: 'kg',
-        qty: 12,
-        remarks: 'nothing so far'
-      },
-      {
-        itemNo: 'DT-003',
-        itemName: 'TNT',
-        unit: 'kg',
-        qty: 12,
-        remarks: 'nothing so far'
-      },
-      {
-        itemNo: 'DT-004',
-        itemName: 'TNT',
-        unit: 'kg',
-        qty: 12,
-        remarks: 'nothing so far'
-      },
-      {
-        itemNo: 'DT-005',
-        itemName: 'TNT',
-        unit: 'kg',
-        qty: 12,
-        remarks: 'nothing so far'
-      },{
-        itemNo: 'DT-005',
-        itemName: 'TNT',
-        unit: 'kg',
-        qty: 12,
-        remarks: 'nothing so far'
-      },{
-        itemNo: 'DT-005',
-        itemName: 'TNT',
-        unit: 'kg',
-        qty: 12,
-        remarks: 'nothing so far'
-      }
-    ]
+    this.data = [];
+    res.items.forEach(element => {
+      this.data.push({
+        code:element.code ,
+        description: element.description,
+        unit: element.unit,
+        qty: element.quantity
+      });
+    });
     this.dataSourceIncMat = new MatTableDataSource(this.data);
+
+    this.dataSourceIncMat.paginator = this.paginator;
+    this.dataSourceIncMat.sort = this.sort;
   }
 
   populateDataToSRN():void{

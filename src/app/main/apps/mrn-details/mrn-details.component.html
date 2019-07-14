@@ -33,35 +33,25 @@
             <input matInput placeholder="Srn No" disabled>
           </mat-form-field>
 
-          <mat-form-field>
-            <mat-select placeholder="Site Location" disabled>
-              <mat-option *ngFor="let sort of sorts" [value]="sort.value">
-                {{sort.viewValue}}
-              </mat-option>
-            </mat-select>
+          <mat-form-field class="p-24">
+            <input matInput placeholder="Site location" disabled>
           </mat-form-field>
           <div>
+
             <mat-form-field class="p-24">
-              <input matInput [matDatepicker]="dp1" placeholder="Completly disabled" disabled>
-              <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
-              <mat-datepicker #dp1></mat-datepicker>
+              <input matInput placeholder="Request By" disabled>
             </mat-form-field>
 
-            <mat-form-field>
-              <input matInput placeholder="Request By" disabled>
+            <mat-form-field class="p-24">
+              <input matInput placeholder="Approved By" disabled>
             </mat-form-field>
           </div>
 
           <div>
             <mat-form-field class="p-24">
-              <input matInput [matDatepicker]="dp2" placeholder="Completly disabled" disabled>
-              <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
-              <mat-datepicker #dp2></mat-datepicker>
+              <input matInput placeholder="Status" disabled>
             </mat-form-field>
 
-            <mat-form-field>
-              <input matInput placeholder="Approved By" disabled>
-            </mat-form-field>
           </div>
 
 
@@ -80,19 +70,19 @@
               <table class="simple clickable">
                 <thead>
                   <tr>
-                    <th></th>
+                    <!-- <th></th>
                     <th class="text-right">Clicks</th>
-                    <th class="text-right">Conv</th>
+                    <th class="text-right">Conv</th> -->
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>Appproved by - John on 2019-01-05</td>
-                    
+
                   </tr>
                   <tr>
                     <td>Created MRN on 2019-01-01</td>
-                   
+
                   </tr>
 
                 </tbody>
@@ -107,23 +97,23 @@
         </div>
 
 
-        <div>
+        <div class="p-24">
 
-          <h3 class="m-0">Included Materials</h3>
+          <h3 class="m-0 p-24">Included Materials</h3>
           <!-- Table Mrn -->
-          <table mat-table [dataSource]="dataSourceIncMat" matSort class="mat-elevation-z8 ">
+          <table mat-table [dataSource]="dataSourceIncMat" matSort class="mat-elevation-z8 p-24 ">
 
             <!-- ID Column -->
-            <ng-container matColumnDef="itemNo">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Item No</th>
-              <td mat-cell *matCellDef="let row"> {{row.itemNo}} </td>
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Item Code</th>
+              <td mat-cell *matCellDef="let row"> {{row.code}} </td>
             </ng-container>
 
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="itemName">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Item name </th>
-              <td mat-cell *matCellDef="let row"> {{row.itemName}}% </td>
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+              <td mat-cell *matCellDef="let row"> {{row.description}}</td>
             </ng-container>
 
             <!-- Name Column -->
@@ -138,10 +128,10 @@
               <td mat-cell *matCellDef="let row"> {{row.qty}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="remarks">
+            <!-- <ng-container matColumnDef="remarks">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Remarks </th>
               <td mat-cell *matCellDef="let row"> {{row.remarks}} </td>
-            </ng-container>
+            </ng-container> -->
 
             <tr mat-header-row *matHeaderRowDef="displayedColumnsIncMaterial"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumnsIncMaterial;"></tr>
@@ -152,11 +142,11 @@
 
         </div>
 
-        <div>
+        <div class="p-24">
 
-          <h3 class="m-0">Linked Store Requisition Notes</h3>
+          <h3 class="m-0 p-24">Linked Store Requisition Notes</h3>
           <!-- Table Mrn -->
-          <table mat-table [dataSource]="dataSourceSRN" matSort class="mat-elevation-z8 ">
+          <table mat-table [dataSource]="dataSourceSRN" matSort class="mat-elevation-z8 p-24 ">
 
             <!-- ID Column -->
             <ng-container matColumnDef="srnNo">

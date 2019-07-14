@@ -20,11 +20,11 @@ export class HttpDataService {
 
     // Token set
     this.token = this.authService.getToken();
-    //this.token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjNWU1ZDg0MWM5NzBlMDAxN2U5Nzk0ZCIsInVzZXJuYW1lIjoiY2hhbW9kIiwicm9sZSI6MTAwMCwiaWF0IjoxNTUwNjgxMzI3LCJleHAiOjE1NTEyODYxMjd9.GYydP2Yq0EF-sjlcd-AeXqTqoE6geRb0HsPdWEBc8ZA";
+    this.token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoYW1vZEBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJjaGFkIiwibGFzdE5hbWUiOiJicmFkIiwicm9sZSI6IkFETUlOIiwiYXZhdGFyVXJsIjoic3RyaW5nIiwiaWF0IjoxNTYzMDc5NzQ1LCJleHAiOjE1NjMwODMzNDV9.H71eZCWMlyRUO-1wLYvrEcn6zSZf0SRQybOb6uITZ8U";
     // Header set
-    this.headers = new HttpHeaders();
-    this.headers.set('Content-Type', 'application/json');
-    this.headers.set('Authorization', this.token);
+    this.headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', this.token);
   }
 
   // make a post req

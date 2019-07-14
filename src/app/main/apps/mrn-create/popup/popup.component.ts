@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MrnItemAddPopupService } from './mrn-item-add-popup.service';
-import { MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material';
 
 export interface PopUpItem {
 
@@ -30,7 +30,7 @@ export class PopupComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _popUpService:MrnItemAddPopupService,
-    private dialogRef:MatDialogRef<PopupComponent>
+    private dialogRef:MatDialogRef<PopupComponent>,
     ) { }
 
   ngOnInit() {
@@ -44,6 +44,8 @@ export class PopupComponent implements OnInit {
 
     });
 
+
+
     // get items from master table to dropdown
     this.items = [
       {value:'0291',viewValue:'ItmNo - 0291 Name - dynamites'},
@@ -55,8 +57,11 @@ export class PopupComponent implements OnInit {
     ];
 
   }
+  ngOnDestroy(): void {
+    console.log('destroyed ...');
+  }
 
-  AddItem(): void {
+  onAddItem(): void {
     if (this.form.valid) {
 
       this._popUpService.item = this.form.value;
@@ -67,5 +72,6 @@ export class PopupComponent implements OnInit {
   closeDialog(){
     this.dialogRef.close();
   }
+
 
 }
