@@ -20,7 +20,7 @@ export class HttpDataService {
 
     // Token set
     this.token = this.authService.getToken();
-    this.token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoYW1vZEBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJjaGFkIiwibGFzdE5hbWUiOiJicmFkIiwicm9sZSI6IkFETUlOIiwiYXZhdGFyVXJsIjoic3RyaW5nIiwiaWF0IjoxNTYzMDc5NzQ1LCJleHAiOjE1NjMwODMzNDV9.H71eZCWMlyRUO-1wLYvrEcn6zSZf0SRQybOb6uITZ8U";
+    this.token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNoYW1vZEBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJjaGFkIiwibGFzdE5hbWUiOiJicmFkIiwicm9sZSI6IkFETUlOIiwiYXZhdGFyVXJsIjoic3RyaW5nIiwiaWF0IjoxNTYzMDkyNzk4LCJleHAiOjE1NjMwOTYzOTh9.y7aQBKSKY-adJ2K4sLMPEOy-yA54HicbkY3i4ngaLYM";
     // Header set
     this.headers = new HttpHeaders()
       .set('Content-Type', 'application/json')

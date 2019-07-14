@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort,MatDialog } from '@angular/material';
 import { MrnAddComponent } from './popup/mrn-add.component';
+import { MrnAddPopupService } from './popup/mrn-add-popup.service';
 
 export interface SiteLocation {
   value: string;
@@ -49,6 +50,7 @@ export class SrnDocumentGeneratorComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
+    private _popUpService: MrnAddPopupService
   ) { }
 
   ngAfterViewInit() {
@@ -67,6 +69,15 @@ export class SrnDocumentGeneratorComponent implements OnInit {
     }
   }
   MrnsPopUp() {
+    
     this.dialog.open(MrnAddComponent);
+
+    this.dialog.afterAllClosed.subscribe(() => {
+  
+      if(this._popUpService.item != undefined){
+        console.log(this._popUpService.item);
+      }
+    });
+
   }
 }

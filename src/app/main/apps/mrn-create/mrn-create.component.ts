@@ -6,6 +6,7 @@ import { PopupComponent } from './popup/popup.component';
 import { MrnItemAddPopupService } from './popup/mrn-item-add-popup.service';
 
 
+
 export interface Item {
   itemNo: string;
   itemName: string;
@@ -29,11 +30,6 @@ export class MrnCreateComponent implements OnInit {
   displayedColumns: string[] = ['Item No', 'Item Name', 'Unit', 'Qty', 'Remarks'];
   dataSource: MatTableDataSource<Item>;
   data: Item[] = [
-    { itemNo: '001', itemName: 'Dynamites', qty: 100, remarks: 'no rush', unit: 'kg' },
-    { itemNo: '001', itemName: 'Dynamites', qty: 100, remarks: 'no rush', unit: 'kg' },
-    { itemNo: '001', itemName: 'Dynamites', qty: 100, remarks: 'no rush', unit: 'kg' },
-    { itemNo: '001', itemName: 'Dynamites', qty: 100, remarks: 'no rush', unit: 'kg' },
-    { itemNo: '001', itemName: 'Dynamites', qty: 100, remarks: 'no rush', unit: 'kg' },
     { itemNo: '001', itemName: 'Dynamites', qty: 100, remarks: 'no rush', unit: 'kg' },
 
   ];
@@ -80,12 +76,9 @@ export class MrnCreateComponent implements OnInit {
 
     this.dataSource = new MatTableDataSource(this.data);
     this._popUpService.item = null;
-    
-    this.dialog.afterAllClosed.subscribe(() => {
-      if(this._popUpService.item != undefined){
-        console.log(this._popUpService.item);
-      }
-    });
+
+
+
   }
 
   ngOnDestroy(): void {
@@ -104,9 +97,12 @@ export class MrnCreateComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(PopupComponent);
-    // this._popUpService.openDialog().subscribe((data)=>{
-    //   console.log("ran...");
-    // });
+
+    this.dialog.afterAllClosed.subscribe(() => {
+      if(this._popUpService.item != undefined){
+        console.log(this._popUpService.item);
+      }
+    });
 
   }
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RouterModule,Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
   MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
@@ -42,6 +43,8 @@ const routes: Routes = [
     MatCardModule,
     MatCheckboxModule,
     MatChipsModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MrnItemAddPopupService } from './mrn-item-add-popup.service';
 import { MatDialog, MatDialogRef, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material';
+import { HttpDataService } from 'app/main/helpers/http-data.service';
 
 export interface PopUpItem {
 
@@ -12,8 +13,8 @@ export interface PopUpItem {
 }
 
 interface Item {
-  value:string;
-  viewValue:string;
+  value: string;
+  viewValue: string;
 }
 
 @Component({
@@ -28,10 +29,11 @@ export class PopupComponent implements OnInit {
   items: Item[];
 
   constructor(
+    private _dataService: HttpDataService,
     private _formBuilder: FormBuilder,
-    private _popUpService:MrnItemAddPopupService,
-    private dialogRef:MatDialogRef<PopupComponent>,
-    ) { }
+    private _popUpService: MrnItemAddPopupService,
+    private dialogRef: MatDialogRef<PopupComponent>,
+  ) { }
 
   ngOnInit() {
 
@@ -39,21 +41,26 @@ export class PopupComponent implements OnInit {
     this.form = this._formBuilder.group({
 
       popupItemName: ['', Validators.required],
-      popupQty: ['', [Validators.required,Validators.pattern('^[0-9]$')]],
-      popupRemarks: ['', [Validators.required,Validators.maxLength(100)]]
+      popupQty: ['', [Validators.required, Validators.pattern('^[0-9]$')]],
+      popupRemarks: ['', [Validators.required, Validators.maxLength(100)]]
 
+    });
+
+    // load items from master item table
+    this._dataService.makeGet('items').subscribe((res:any) => {
+      if (res) {
+        
+        res.forEach(el => {
+          this.items.push({value: el.id,viewValue:'Code: '+el.code+' Name: '+el.description+ 'Unit: '+ el.unit});
+        });
+      }
     });
 
 
 
     // get items from master table to dropdown
     this.items = [
-      {value:'0291',viewValue:'ItmNo - 0291 Name - dynamites'},
-      {value:'0292',viewValue:'ItmNo - 0292 Name - hotwires'},
-      {value:'0293',viewValue:'ItmNo - 0293 Name - tubes'},
-      {value:'0294',viewValue:'ItmNo - 0294 Name - water barrels'},
-      {value:'0295',viewValue:'ItmNo - 0295 Name - turbine coolants'},
-      {value:'0296',viewValue:'ItmNo - 0296 Name - grease'},
+      { value: '0291', viewValue: 'ItmNo - 0291 Name - dynamites' },
     ];
 
   }
@@ -69,7 +76,7 @@ export class PopupComponent implements OnInit {
     }
   }
 
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close();
   }
 
