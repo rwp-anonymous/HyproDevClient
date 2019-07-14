@@ -3,24 +3,18 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 
 export interface PoData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
+  poNo: string;
+  itemName: string;
+  unit: string;
+  status: string;
 }
 export interface MrnData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
+  mrnNo: string;
+  itemName: string;
+  unit: string;
+  order: number;
+  status: string;
 }
-
-/** Constants used to fill up our data base. */
-const COLORS: string[] = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-  'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
-const NAMES: string[] = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-  'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-  'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
 
 
 @Component({
@@ -30,24 +24,22 @@ const NAMES: string[] = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
 })
 export class SrnDetailsComponent implements OnInit {
 
-  displayedColumnsMrn: string[] = ['id','name', 'progress', 'color'];
+  displayedColumnsMrn: string[] = ['mrnNo','itemName', 'unit', 'order','status'];
   dataSourceMrn: MatTableDataSource<MrnData>;
+
+  dataMRN:MrnData[];
+  dataPO:PoData[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('paginatorpo',{read:MatPaginator}) paginatorpo: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
 
-  displayedColumnsPo: string[] = ['id','name', 'progress', 'color'];
+  displayedColumnsPo: string[] = ['poNo','itemName', 'unit', 'status'];
   dataSourcePo: MatTableDataSource<PoData>;
   constructor() { 
-
-    // Create 100 users
-    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
-
-    // Assign the data to the data source for the table to render
-    this.dataSourceMrn = new MatTableDataSource(users);
-    this.dataSourcePo = new MatTableDataSource(users);
+    this.populateDataToMRN();
+    this.populateDataToPo();
   }
 
   ngOnInit() {
@@ -60,23 +52,66 @@ export class SrnDetailsComponent implements OnInit {
     this.dataSourcePo.paginator = this.paginatorpo;
     this.dataSourcePo.sort = this.sort;
   }
+  populateDataToMRN():void{
 
+    this.dataMRN = [
+      {
+        mrnNo: 'MRN-001',
+        itemName: 'TNT',
+        unit: 'kg',
+        order: 12,
+        status:'pending'
+      },
+      {
+        mrnNo: 'MRN-002',
+        itemName: 'TNT',
+        unit: 'kg',
+        order: 12,
+        status:'done'
+      }
+    ]
+    this.dataSourceMrn = new MatTableDataSource(this.dataMRN);
+}
   
+populateDataToPo():void{
+this.dataPO=[
+  {
+    poNo: 'PO-001',
+    itemName: 'Cement',
+    unit: 'kg',
+    status: 'dummy'
+  },
+  {
+    poNo: 'PO-002',
+    itemName: 'Cement',
+    unit: 'kg',
+    status: 'dummy'
+  },
+  {
+    poNo: 'PO-003',
+    itemName: 'Cement',
+    unit: 'kg',
+    status: 'dummy'
+  },
+  {
+    poNo: 'PO-0041',
+    itemName: 'Cement',
+    unit: 'kg',
+    status: 'dummy'
+  },
+  {
+    poNo: 'PO-001',
+    itemName: 'Cement',
+    unit: 'kg',
+    status: 'dummy'
+  },
+]
+this.dataSourcePo = new MatTableDataSource(this.dataPO);
+}
 }
 
 
 /** Builds and returns a new User. */
-function createNewUser(id: number): MrnData  {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
 
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
-}
 
 

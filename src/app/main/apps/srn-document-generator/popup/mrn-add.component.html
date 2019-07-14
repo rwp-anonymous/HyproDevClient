@@ -1,0 +1,28 @@
+<form class="mat-card p-24" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" name="form"
+  >
+
+  <div class="h2 mb-24">Add Mrns</div>
+
+  <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+    <mat-form-field class="pl-24" style="width: 100%;">
+      <mat-select placeholder="Mrns" formControlName="popupItemName">
+        <mat-option *ngFor="let mrn of mrns" [value]="mrn.value">
+          {{mrn.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+ 
+  <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+    <mat-form-field style="width: 100%;" class="pl-24">
+      <textarea matInput placeholder="Remarks" formControlName="popupRemarks"></textarea>
+    </mat-form-field>
+
+
+  </div>
+  <button mat-raised-button color="accent" class="m-24" (click)="AddMrn();"> Add </button>
+
+</form>
