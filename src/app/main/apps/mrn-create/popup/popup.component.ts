@@ -48,10 +48,9 @@ export class PopupComponent implements OnInit {
 
     // load items from master item table
     this._dataService.makeGet('items').subscribe((res:any) => {
-      if (res) {
-        
+      if (res) {  
         res.forEach(el => {
-          this.items.push({value: el.id,viewValue:'Code: '+el.code+' Name: '+el.description+ 'Unit: '+ el.unit});
+          this.items.push({value: el.code+','+el.description+','+el.unit,viewValue:'Code: '+el.code+ '| Name: '+el.description+ '| Unit: '+ el.unit});
         });
       }
     });
@@ -59,9 +58,7 @@ export class PopupComponent implements OnInit {
 
 
     // get items from master table to dropdown
-    this.items = [
-      { value: '0291', viewValue: 'ItmNo - 0291 Name - dynamites' },
-    ];
+    this.items = [];
 
   }
   ngOnDestroy(): void {

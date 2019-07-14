@@ -29,10 +29,7 @@ export class MrnCreateComponent implements OnInit {
 
   displayedColumns: string[] = ['Item No', 'Item Name', 'Unit', 'Qty', 'Remarks'];
   dataSource: MatTableDataSource<Item>;
-  data: Item[] = [
-    { itemNo: '001', itemName: 'Dynamites', qty: 100, remarks: 'no rush', unit: 'kg' },
-
-  ];
+  data: Item[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -100,7 +97,31 @@ export class MrnCreateComponent implements OnInit {
 
     this.dialog.afterAllClosed.subscribe(() => {
       if(this._popUpService.item != undefined){
-        console.log(this._popUpService.item);
+        //{ itemNo: '001', itemName: 'Dynamites', qty: 100, remarks: 'no rush', unit: 'kg' },
+        let popupItem = this._popUpService.item;
+        let itemBreak = popupItem.popupItemName.split(',');
+        let isDuplicate = false;
+
+        for (let i = 0; i < this.data.length; i++) {
+          if(this.data[i].itemNo == itemBreak[0]){
+            isDuplicate = true;
+            break;
+          }
+          
+        }
+
+        if(!isDuplicate){
+          this.data.push({
+            itemNo:itemBreak[0],
+            itemName: itemBreak[1],
+            qty: popupItem.popupQty,
+            remarks:popupItem.popupRemarks,
+            unit:itemBreak[2]
+          });
+  
+          this.dataSource.data = this.data;
+        }
+
       }
     });
 
